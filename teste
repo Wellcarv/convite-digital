@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convite Real</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative&family=MedievalSharp&display=swap');
+        
+        body {
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #f0e6d2;
+            overflow: hidden;
+            font-family: 'MedievalSharp', cursive;
+        }
+        
+        .pergaminho-container {
+            position: relative;
+            width: 95%;
+            max-width: 500px;
+        }
+        
+        .pergaminho {
+            background: linear-gradient(to bottom, #fff9e8 0%, #fff9e8 30px, #f5e8c4 100%);
+            padding: 40px 30px;
+            border-radius: 5px 5px 50% 50%;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            position: relative;
+            transform: scaleY(0);
+            transform-origin: top;
+            transition: transform 2s ease-out;
+            border: 1px solid #d4af37;
+        }
+        
+        .pergaminho:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 30px;
+            background: repeating-linear-gradient(
+                to bottom,
+                #f5e8c4,
+                #f5e8c4 10px,
+                #e5d0a1 10px,
+                #e5d0a1 20px
+            );
+        }
+        
+        .pergaminho:after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 30px;
+            background: repeating-linear-gradient(
+                to bottom,
+                #f5e8c4,
+                #f5e8c4 10px,
+                #e5d0a1 10px,
+                #e5d0a1 20px
+            );
+        }
+        
+        .pergaminho.aberto {
+            transform: scaleY(1);
+        }
+        
+        .conteudo {
+            opacity: 0;
+            transition: opacity 1.5s ease 1s;
+            color: #3a2810;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .pergaminho.aberto .conteudo {
+            opacity: 1;
+        }
+        
+        h1 {
+            font-family: 'Cinzel Decorative', serif;
+            color: #5c2e0d;
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+        
+        .selo {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: #8b0000;
+            border-radius: 50%;
+            bottom: -20px;
+            right: -15px;
+            transform: rotate(15deg);
+            animation: flutuar 3s ease-in-out infinite alternate;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: gold;
+            font-size: 30px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.5);
+        }
+        
+        @keyframes flutuar {
+            0% { transform: rotate(15deg) translateY(0); }
+            100% { transform: rotate(15deg) translateY(-10px); }
+        }
+        
+        .linha {
+            border-top: 1px solid #c9a66b;
+            margin: 1.5rem auto;
+            width: 70%;
+        }
+        
+        .destaque {
+            color: #8b4513;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="pergaminho-container">
+        <div class="pergaminho" id="pergaminho">
+            <div class="conteudo" id="conteudo">
+                <h1>Convite Real</h1>
+                <div class="linha"></div>
+                <p>Caros amigos e familiares,</p>
+                <p>É com honra que vos convidamos para celebrar conosco este momento tão especial.</p>
+                
+                <p><span class="destaque">🗓️ Data:</span> 15 de Junho de 2025</p>
+                <p><span class="destaque">⏰ Horário:</span> 19 horas</p>
+                <p><span class="destaque">🏰 Local:</span> Espaço Festivo - Barueri/SP</p>
+                
+                <div class="linha"></div>
+                <p>Sua presença coroará nossa alegria!</p>
+                <p>Por favor, confirmar até 05 de Junho.</p>
+            </div>
+        </div>
+        <div class="selo">🎖️</div>
+    </div>
+
+    <script>
+        // Animação de abertura ao carregar
+        window.onload = function() {
+            document.getElementById('pergaminho').classList.add('aberto');
+            
+            setTimeout(() => {
+                document.getElementById('conteudo').style.opacity = 1;
+            }, 1000);
+        };
+        
+        // Efeito de digitação (opcional - remova se não quiser)
+        setTimeout(() => {
+            const elemento = document.getElementById('conteudo');
+            const textoOriginal = elemento.innerHTML;
+            elemento.innerHTML = '';
+            
+            let i = 0;
+            const escrever = () => {
+                if (i < textoOriginal.length) {
+                    elemento.innerHTML = textoOriginal.substring(0, i+1);
+                    i++;
+                    setTimeout(escrever, 30);
+                }
+            };
+            
+            escrever();
+        }, 1500);
+    </script>
+</body>
+</html>
